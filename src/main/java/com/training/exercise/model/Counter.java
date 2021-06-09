@@ -31,9 +31,6 @@ public class Counter {
 
     @Override
     public String toString() {
-        return "Counter{" +
-                "name='" + name + '\'' +
-                ", value=" + value +
-                '}';
+        return "{\"" + name + "\": " + value + "}";
     }
 }

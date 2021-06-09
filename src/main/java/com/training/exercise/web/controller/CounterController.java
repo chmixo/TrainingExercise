@@ -13,7 +13,7 @@ public class CounterController {
     @GetMapping(value = "/counters/{counter}")
     public String getCounter(@PathVariable String counter){
         Counter exempleCounter = new Counter(counter, 10);
-        return "{\"" + exempleCounter.getName() + "\": " + exempleCounter.getValue() + "}";
+        return exempleCounter.toString();
     }
 
 
