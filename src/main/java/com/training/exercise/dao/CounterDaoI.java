@@ -14,6 +14,7 @@ public class CounterDaoI implements CounterDao {
         counters.put("xyz", 3);
     }
 
+    // Returns a List of All existing Counters
     @Override
     public List<Counter> findAll() {
         // We iterate through the DataBase (HashMap) to find all existing Counters
@@ -26,6 +27,7 @@ public class CounterDaoI implements CounterDao {
         return counterList;
     }
 
+    //Return the Counter specified by the id, return null if it does not exist
     @Override
     public Counter findById(String id) {
         // We iterate through the DataBase (HashMap) to find if the specified Id exists
@@ -45,21 +47,30 @@ public class CounterDaoI implements CounterDao {
         return counter;
     }
 
+    // Return 0 if the delete operation was a success, -1 if not
     @Override
-    public void delete(String id) {
+    public int delete(String id) {
         if(counters.containsKey(id)){
             if(counters.get(id) > 0){
                 counters.put(id, counters.get(id) - 1 );
+                return 0;
             } else {
                 counters.remove(id);
+                return 0;
             }
+        } else{
+            return -1;
         }
     }
 
+    // Return 0 if the update operation was a success, -1 if not
     @Override
-    public void update(String id) {
+    public int update(String id) {
         if(counters.containsKey(id)){
             counters.put(id, counters.get(id) + 1 );
+            return 0;
+        } else {
+            return -1;
         }
     }
 }
