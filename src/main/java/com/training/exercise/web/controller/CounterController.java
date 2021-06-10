@@ -12,15 +12,22 @@ public class CounterController {
     @Autowired
     private CounterDao counterDao;
 
+    // GET /counters/
     @GetMapping(value = "/counters")
     public String getCounters(){
         return counterDao.findAll().toString();
     }
 
+    // GET /counters/:counter
     @GetMapping(value = "/counters/{counter}")
     public String getCounter(@PathVariable String counter){
         return counterDao.findById(counter).toString();
     }
 
+    //POST /counter/
+    @PostMapping(value = "/counters")
+    public void addCounter(@RequestBody Counter counter) {
+        counterDao.save(counter);
+    }
 
 }

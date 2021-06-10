@@ -18,7 +18,6 @@ public class CounterDaoI implements CounterDao {
 
     @Override
     public List<Counter> findAll() {
-
         // We iterate through the DataBase (HashMap) to find all existing Counters
         Iterator it = counters.entrySet().iterator();
         while (it.hasNext()) {
