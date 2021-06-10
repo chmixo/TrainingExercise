@@ -14,9 +14,10 @@ public class CounterDaoI implements CounterDao {
         counters.put("xyz", 3);
     }
 
+    public static List<Counter> counterList = new ArrayList<>();
+
     @Override
     public List<Counter> findAll() {
-        List<Counter> counterList = new ArrayList<>();
 
         // We iterate through the DataBase (HashMap) to find all existing Counters
         Iterator it = counters.entrySet().iterator();
