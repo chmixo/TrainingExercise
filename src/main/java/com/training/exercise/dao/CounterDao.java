@@ -9,4 +9,6 @@ public interface CounterDao {
         public List<Counter> findAll();
         public Counter findById(String id);
         public Counter save(Counter counter);
+        public void delete(String id);
+        public void update(String id);
 }
