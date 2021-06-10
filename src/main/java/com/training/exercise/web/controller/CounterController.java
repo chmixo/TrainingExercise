@@ -1,6 +1,7 @@
 package com.training.exercise.web.controller;
 import com.training.exercise.dao.CounterDao;
 import com.training.exercise.model.Counter;
+import com.training.exercise.web.exceptions.CounterNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,12 @@ public class CounterController {
     // GET /counters/:counter
     @GetMapping(value = "/counters/{counter}")
     public String getCounter(@PathVariable String counter){
-        return counterDao.findById(counter).toString();
+        Counter newCounter = counterDao.findById(counter);
+        if(newCounter == null){
+            throw new CounterNotFoundException("The counter you are looking for : " + counter + ", does not exist");
+        }
+
+        return newCounter.toString();
     }
 
     //POST /counter/
@@ -50,12 +56,20 @@ public class CounterController {
 
     @DeleteMapping (value = "/counters/{counter}")
     public void deleteCounter(@PathVariable String counter) {
-        counterDao.delete(counter);
+        int response = counterDao.delete(counter);
+        checkForNotFoundException(response);
     }
 
     @PutMapping (value = "/counters/{counter}")
-    public void updateProduit(@PathVariable String counter) {
-        counterDao.update(counter);
+    public void updateCounter(@PathVariable String counter) {
+        int response = counterDao.update(counter);
+        checkForNotFoundException(response);
+    }
+
+    public void checkForNotFoundException(int response){
+        if(response == -1 ){
+            throw new CounterNotFoundException("The counter you are looking to modify does not exist");
+        }
     }
 
 }
