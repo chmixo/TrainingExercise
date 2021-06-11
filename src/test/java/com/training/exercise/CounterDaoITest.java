@@ -115,4 +115,19 @@ public class CounterDaoITest {
 
         assertThat(result).isEqualTo(expected);
     }
+
+    // Test de la methode update si le id n'existe pas
+    @Test
+    @Order(9)
+    public void deleteMethodShouldDeleteCounterIfValueIs0(){
+        List<Counter> expected = Arrays.asList(new Counter("abc", 5), new Counter("xyz", 3));
+        CounterDao counterDao = new CounterDaoI();
+
+        for(int i=0; i <= 8 ; i++){
+            counterDao.delete("counterTest");
+        }
+        List<Counter> result = counterDao.findAll();
+
+        assertThat(result.toString()).isEqualTo(expected.toString());
+    }
 }
