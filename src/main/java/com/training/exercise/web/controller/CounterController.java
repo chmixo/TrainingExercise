@@ -57,19 +57,15 @@ public class CounterController {
     @DeleteMapping (value = "/counters/{counter}")
     public void deleteCounter(@PathVariable String counter) {
         int response = counterDao.delete(counter);
-        checkForNotFoundException(response);
+        //checkForNotFoundException(response);
+        CounterNotFoundException.checkForNotFoundException(response);
     }
 
     @PutMapping (value = "/counters/{counter}")
     public void updateCounter(@PathVariable String counter) {
         int response = counterDao.update(counter);
-        checkForNotFoundException(response);
-    }
-
-    public void checkForNotFoundException(int response){
-        if(response == -1 ){
-            throw new CounterNotFoundException("The counter you are looking to modify does not exist");
-        }
+        //checkForNotFoundException(response);
+        CounterNotFoundException.checkForNotFoundException(response);
     }
 
 }

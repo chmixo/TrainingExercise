@@ -14,4 +14,10 @@ public class CounterNotFoundException extends RuntimeException {
     public String getMessage() {
         return super.getMessage();
     }
+
+    public static void checkForNotFoundException(int response){
+        if(response == -1 ){
+            throw new CounterNotFoundException("The counter you are looking to modify does not exist");
+        }
+    }
 }
